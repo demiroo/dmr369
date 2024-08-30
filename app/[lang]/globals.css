@@ -147,7 +147,10 @@ code[data-theme*=" "] span {
 }
 
 .custom-cover {
-object-fit: cover;
+  max-width: 100% !important;  /* Use only if necessary */
+  height: 100% !important;     /* Use only if necessary */
+  object-fit: cover;
+
 }
 
 

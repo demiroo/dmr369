@@ -3,7 +3,7 @@ import BlurFade from "../../components/magicui/blur-fade";
 import BlurFadeText from "../../components/magicui/blur-fade-text";
 import { ProjectCard } from "../..//components/project-card";
 import { ResumeCard } from "../../components/resume-card";
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import { Badge } from "../../components/ui/badge";
 import { DATA } from "../../data/resume";
 import Link from "next/link";
@@ -12,9 +12,9 @@ import { getDictionary } from "../../get-dictionary";
 import { Locale } from "../../i18n-config";
 import LocaleSwitcher from "../../components/locale-switcher";
 import ShineBorder from "../../components/magicui/shine-border";
+import Image from "next/image";
 
-
-export default async function Page( {
+export default async function Page({
   params: { lang },
 }: {
   params: { lang: Locale };
@@ -33,35 +33,35 @@ export default async function Page( {
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
               />
-            <BlurFadeText
-  className="max-w-[600px] md:text-xl"
-  delay={BLUR_FADE_DELAY}
-  text={dictionary["HomePage"].description}  // Corrected this line
-/>
+              <BlurFadeText
+                className="max-w-[600px] md:text-xl"
+                delay={BLUR_FADE_DELAY}
+                text={dictionary["HomePage"].description} // Corrected this line
+              />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
-            <ShineBorder className=" rounded-full object-cover"
-  borderRadius={1000} // Ensures the border is round, assuming a circular Avatar
-  borderWidth={2} // Adjust as needed
-  duration={8} // Adjust the animation duration
-  color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}>
-
-
- <Avatar className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full object-cover">
- <AvatarImage
-        src="https://guezelsoezler.com/4e514677-765c-40a5-8ef6-c69f579115f7.jpg.png"
-        alt="File Storage"
-        className="w-full h-full object-cover rounded-full"
-      />
-      <AvatarFallback>
-        {/* You can include fallback content here, e.g., initials or a default image */}
-        <span className="text-gray-500">Fallback</span>
-      </AvatarFallback>
-    </Avatar>
-</ShineBorder>
-
-</BlurFade>
-
+              <ShineBorder
+                className=" rounded-full object-cover"
+                borderRadius={1000} // Ensures the border is round, assuming a circular Avatar
+                borderWidth={2} // Adjust as needed
+                duration={8} // Adjust the animation duration
+                color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+              >
+                <Avatar className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full object-cover zoom-card">
+                  <div className="image-container">
+                    <Image
+                      src="https://guezelsoezler.com/4e514677-765c-40a5-8ef6-c69f579115f7.jpg.png"
+                      alt="File Storage"
+                      layout="fill"
+                      className="rounded-t-lg zoom-image custom-cover"
+                    />
+                  </div>
+                  <AvatarFallback>
+                    {/* You can include fallback content here, e.g., initials or a default image */}
+                  </AvatarFallback>
+                </Avatar>
+              </ShineBorder>
+            </BlurFade>
           </div>
         </div>
       </section>
@@ -70,13 +70,18 @@ export default async function Page( {
           <h2 className="text-xl font-bold">{dictionary["HomePage"].title} </h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
-        <h2 className="text-xl font-bold">{dictionary["HomePage"].description} </h2>
+          <h2 className="text-xl font-bold">
+            {dictionary["HomePage"].description}{" "}
+          </h2>
         </BlurFade>
       </section>
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold"> {dictionary["HomePage"].berufserfahrungtitle} </h2>
+            <h2 className="text-xl font-bold">
+              {" "}
+              {dictionary["HomePage"].berufserfahrungtitle}{" "}
+            </h2>
           </BlurFade>
           {DATA.work.map((work, id) => (
             <BlurFade
@@ -101,7 +106,9 @@ export default async function Page( {
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold">{dictionary["HomePage"].ausbildungtitle} </h2>
+            <h2 className="text-xl font-bold">
+              {dictionary["HomePage"].ausbildungtitle}{" "}
+            </h2>
           </BlurFade>
           {DATA.education.map((education, id) => (
             <BlurFade
@@ -124,7 +131,9 @@ export default async function Page( {
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold">{dictionary["HomePage"].faehigkeiten} </h2>
+            <h2 className="text-xl font-bold">
+              {dictionary["HomePage"].faehigkeiten}{" "}
+            </h2>
           </BlurFade>
           <div className="flex flex-wrap gap-1">
             {DATA.skills.map((skill, id) => (
@@ -144,10 +153,10 @@ export default async function Page( {
                   Meine Projekte
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                {dictionary["HomePage"].schauean} 
+                  {dictionary["HomePage"].schauean}
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {dictionary["HomePage"].ichhabeeinevielzahl} 
+                  {dictionary["HomePage"].ichhabeeinevielzahl}
                 </p>
               </div>
             </div>
@@ -166,7 +175,6 @@ export default async function Page( {
                   dates={project.dates}
                   tags={project.technologies}
                   image={project.image}
-                  
                   links={project.links}
                 />
               </BlurFade>
@@ -183,10 +191,10 @@ export default async function Page( {
                   Hackathons
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                {dictionary["HomePage"].ichbaue} 
+                  {dictionary["HomePage"].ichbaue}
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                {dictionary["HomePage"].ichbauegernedinge} 
+                  {dictionary["HomePage"].ichbauegernedinge}
                 </p>
               </div>
             </div>
@@ -220,19 +228,20 @@ export default async function Page( {
                 Kontakt
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              {dictionary["HomePage"].contact} 
+                {dictionary["HomePage"].contact}
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              {dictionary["HomePage"].lustaufeinchat} <Link
+                {dictionary["HomePage"].lustaufeinchat}{" "}
+                <Link
                   href={DATA.contact.social.X.url}
                   className="text-blue-500 hover:underline"
                 >
-                 {dictionary["HomePage"].twitterdm} 
-                </Link>{" "}{dictionary["HomePage"].antworte} 
-                
+                  {dictionary["HomePage"].twitterdm}
+                </Link>{" "}
+                {dictionary["HomePage"].antworte}
               </p>
             </div>
-            <LocaleSwitcher/>
+            <LocaleSwitcher />
           </BlurFade>
         </div>
       </section>
