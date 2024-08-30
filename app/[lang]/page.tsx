@@ -3,11 +3,11 @@ import BlurFade from "../../components/magicui/blur-fade";
 import BlurFadeText from "../../components/magicui/blur-fade-text";
 import { ProjectCard } from "../..//components/project-card";
 import { ResumeCard } from "../../components/resume-card";
-import { Avatar, AvatarFallback } from "../../components/ui/avatar";
+import { Avatar } from "../../components/ui/avatar";
 import { Badge } from "../../components/ui/badge";
 import { DATA } from "../../data/resume";
 import Link from "next/link";
-const BLUR_FADE_DELAY = 0.04;
+const BLUR_FADE_DELAY = 0.05;
 import { getDictionary } from "../../get-dictionary";
 import { Locale } from "../../i18n-config";
 import LocaleSwitcher from "../../components/locale-switcher";
@@ -56,9 +56,6 @@ export default async function Page({
                       className="rounded-t-lg zoom-image custom-cover"
                     />
                   </div>
-                  <AvatarFallback>
-                    {/* You can include fallback content here, e.g., initials or a default image */}
-                  </AvatarFallback>
                 </Avatar>
               </ShineBorder>
             </BlurFade>
