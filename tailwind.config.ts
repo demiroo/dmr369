@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: ["class"], // Enables dark mode with class strategy
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -12,17 +12,16 @@ const config: Config = {
   prefix: "",
   theme: {
     container: {
-      center: true,
-      padding: "2rem",
+      center: true, // Centers the container
+      padding: "2rem", // Adds padding to the container
       screens: {
-        "2xl": "1400px",
+        "2xl": "1400px", // Sets max width for 2xl screens
       },
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-sans)", ...fontFamily.sans], // Extends default sans fonts with CSS variable support
       },
-      
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -59,12 +58,12 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "var(--radius)", // Custom radius value
+        md: "calc(var(--radius) - 2px)", // Reduced radius for medium size
+        sm: "calc(var(--radius) - 4px)", // Reduced radius for small size
       },
       borderWidth: {
-        DEFAULT: "3px", // Adjusted to 3px
+        DEFAULT: "3px", // Sets default border width to 3px
       },
       keyframes: {
         borderBeam: {
@@ -82,15 +81,34 @@ const config: Config = {
             backgroundPosition: "var(--bg-size) 0",
           },
         },
+        subtleGradientAnimationLight: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        subtleGradientAnimationDark: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
       },
       animation: {
         'border-beam': 'borderBeam 12s linear infinite',
         'shine-pulse': 'shine-pulse 3s ease-in-out infinite',
         gradient: "gradient 8s linear infinite",
+        'subtle-gradient-light': 'subtleGradientAnimationLight 30s ease infinite',
+        'subtle-gradient-dark': 'subtleGradientAnimationDark 30s ease infinite',
+      },
+      spacing: {
+        '9': '2.25rem', // For icon size adjustments
+        '4': '1rem', // For smaller icon sizing
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"), // Plugin for handling animations
+    require("@tailwindcss/typography"), // Plugin for better typography support
+  ],
 };
 
 export default config;

@@ -162,3 +162,27 @@ code[data-theme*=" "] span {
 .image-container:hover .zoom-image {
   transform: scale(1.1);
 }
+
+@keyframes subtle-gradient-animation-light {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes subtle-gradient-animation-dark {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-subtle-animated-light {
+  background: linear-gradient(120deg, #f0f0f3, #e6e7ec, #dfe1e6);
+  background-size: 200% 200%;
+  animation: subtle-gradient-animation-light 30s ease infinite;
+}
+
+.bg-subtle-animated-dark {
+  background: linear-gradient(120deg, #1e2024, #2a2d33, #1e2024);
+  background-size: 200% 200%;
+  animation: subtle-gradient-animation-dark 30s ease infinite;
+}

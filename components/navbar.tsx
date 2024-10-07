@@ -1,4 +1,7 @@
-import { Dock, DockIcon } from "../components/magicui/dock";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ModeToggle } from "../components/mode-toggle";
 import { buttonVariants } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
@@ -9,68 +12,111 @@ import {
 } from "../components/ui/tooltip";
 import { DATA } from "../data/resume";
 import { cn } from "../lib/utils";
-import Link from "next/link";
+import { i18n, type Locale } from "../i18n-config";
+import { useTheme } from "next-themes";
 
-export default function Navbar() {
+export default function BottomNavbar() {
+  const pathName = usePathname();
+  const currentLocale = pathName?.split("/")[1] || i18n.defaultLocale;
+
+  const getLocalizedPath = (locale: Locale) => {
+    if (!pathName) return `/${locale}`;
+    const segments = pathName.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
+
+  const { theme } = useTheme(); // Detect theme
+
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
-      <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background" />
-      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
-        {DATA.navbar.map((item) => (
-          <DockIcon key={item.href}>
-            <Tooltip>
+    <nav
+      className={cn(
+        "fixed bottom-0 left-0 right-0 z-50 border-t-2 border-border shadow-md backdrop-blur-lg", // Added blur effect
+        theme === "dark"
+          ? "bg-black bg-opacity-80" // Black background with opacity for dark mode (adjust opacity as needed)
+          : "bg-white bg-opacity-80" // Light background with opacity for light mode
+      )}
+    >
+      <div className="flex items-center justify-between px-4 py-1.5 max-w-screen-lg mx-auto">
+        {/* Reduced padding horizontally and vertically */}
+        <div className="flex items-center space-x-1.5">
+          {DATA.navbar.map((item) => (
+            <Tooltip key={item.href}>
               <TooltipTrigger asChild>
-                <Link 
-                  href={item.href} aria-label="Icon"
+                <Link
+                  href={item.href}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
-                    "size-12"
+                    "size-9" // Reduced size of buttons
                   )}
                 >
-                  <item.icon className="size-4" />
+                  <item.icon className="size-4" /> {/* Smaller icon */}
+                  <span className="sr-only">{item.label}</span>
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{item.label}</p>
+                <p className="text-xs">{item.label}</p>{" "}
+                {/* Smaller tooltip text */}
               </TooltipContent>
             </Tooltip>
-          </DockIcon>
-        ))}
-        <Separator orientation="vertical" className="h-full" />
-        {Object.entries(DATA.contact.social)
-         
-          .map(([name, social]) => (
-            <DockIcon key={name}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={social.url}
-                    className={cn(
-                      buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12"
-                    )}
-                  >
-                    <social.icon className="size-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{name}</p>
-                </TooltipContent>
-              </Tooltip>
-            </DockIcon>
           ))}
-        <Separator orientation="vertical" className="h-full py-2" />
-        <DockIcon>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <ModeToggle />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Theme</p>
-            </TooltipContent>
-          </Tooltip>
-        </DockIcon>
-      </Dock>
-    </div>
+        </div>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        <div className="flex items-center space-x-1.5">
+          {i18n.locales.map((locale) => (
+            <Link
+              key={locale}
+              href={getLocalizedPath(locale)}
+              className={cn(
+                "px-2 py-1 text-xs font-medium rounded-md transition-colors duration-200",
+                locale === currentLocale
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
+              )}
+            >
+              {locale.toUpperCase()}
+            </Link>
+          ))}
+        </div>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        {/* Hide social icons on small screens */}
+        <div className="hidden md:flex items-center space-x-1.5">
+          {Object.entries(DATA.contact.social).map(([name, social]) => (
+            <Tooltip key={name}>
+              <TooltipTrigger asChild>
+                <Link
+                  href={social.url}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-9"
+                  )}
+                >
+                  <social.icon className="size-4" />
+                  <span className="sr-only">{name}</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">{name}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <ModeToggle />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="text-xs">Theme</p> {/* Smaller tooltip text */}
+          </TooltipContent>
+        </Tooltip>
+      </div>
+    </nav>
   );
 }

@@ -10,7 +10,6 @@ import Link from "next/link";
 const BLUR_FADE_DELAY = 0.05;
 import { getDictionary } from "../../get-dictionary";
 import { Locale } from "../../i18n-config";
-import LocaleSwitcher from "../../components/locale-switcher";
 import ShineBorder from "../../components/magicui/shine-border";
 import Image from "next/image";
 
@@ -36,42 +35,38 @@ export default async function Page({
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={dictionary["HomePage"].description} // Corrected this line
+                text={dictionary["HomePage"].description}
               />
             </div>
+
             <BlurFade delay={BLUR_FADE_DELAY}>
-              <ShineBorder
-                className=" rounded-full object-cover"
-                borderRadius={1000} // Ensures the border is round, assuming a circular Avatar
-                borderWidth={2} // Adjust as needed
-                duration={8} // Adjust the animation duration
-                color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
-              >
-                <Avatar className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full object-cover zoom-card">
-                  <div className="image-container">
-                    <Image
-                      src="https://guezelsoezler.com/4e514677-765c-40a5-8ef6-c69f579115f7.jpg.png"
-                      alt="File Storage"
-                      layout="fill"
-                      className="rounded-t-lg zoom-image custom-cover"
-                    />
-                  </div>
-                </Avatar>
-              </ShineBorder>
+              <div className="sticky top-5">
+                {" "}
+                {/* Make the avatar sticky */}
+                <ShineBorder
+                  className=" rounded-full object-cover"
+                  borderRadius={1000} // Ensures the border is round, assuming a circular Avatar
+                  borderWidth={1} // Adjust as needed
+                  duration={8} // Adjust the animation duration
+                  color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                >
+                  <Avatar className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full object-cover zoom-card">
+                    <div className="image-container">
+                      <Image
+                        src="https://guezelsoezler.com/4e514677-765c-40a5-8ef6-c69f579115f7.jpg.png"
+                        alt="File Storage"
+                        layout="fill"
+                        className="rounded-t-lg zoom-image custom-cover"
+                      />
+                    </div>
+                  </Avatar>
+                </ShineBorder>
+              </div>
             </BlurFade>
           </div>
         </div>
       </section>
-      <section id="about">
-        <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">{dictionary["HomePage"].title} </h2>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 4}>
-          <h2 className="text-xl font-bold">
-            {dictionary["HomePage"].description}{" "}
-          </h2>
-        </BlurFade>
-      </section>
+
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
@@ -238,7 +233,6 @@ export default async function Page({
                 {dictionary["HomePage"].antworte}
               </p>
             </div>
-            <LocaleSwitcher />
           </BlurFade>
         </div>
       </section>

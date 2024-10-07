@@ -18,8 +18,7 @@ export default function LocaleSwitcher() {
 
   return (
     <AnimatedGradientText className="sticky-header  flex min-h-[1rem] items-center justify-center mt-5 mb-10">
-    <div className="sticky-header flex min-h-[1rem] items-center justify-center mb-1 mt-1"> 
-      
+      <div className="sticky-header flex min-h-[1rem] items-center justify-center mb-1 mt-1">
         {i18n.locales.map((locale) => {
           const isSelected = locale === currentLocale;
 
@@ -37,8 +36,7 @@ export default function LocaleSwitcher() {
             </Link>
           );
         })}
-      
-    </div>
-    </AnimatedGradientText> 
+      </div>
+    </AnimatedGradientText>
   );
 }
