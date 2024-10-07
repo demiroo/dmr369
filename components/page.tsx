@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import { HackathonCard } from "//components/hackathon-card"
-import BlurFade from "//components/magicui/blur-fade"
-import BlurFadeText from "//components/magicui/blur-fade-text"
-import { ProjectCard } from "//components/project-card"
-import { ResumeCard } from "//components/resume-card"
-import { Avatar } from "//components/ui/avatar"
-import { Badge } from "//components/ui/badge"
-import { DATA } from "//data/resume"
-import Link from "next/link"
-import { getDictionary } from "//get-dictionary"
-import { Locale } from "//i18n-config"
-import LocaleSwitcher from "//components/locale-switcher"
-import ShineBorder from "//components/magicui/shine-border"
-import Image from "next/image"
-import { Button } from "//components/ui/button"
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
+import { HackathonCard } from "../components/hackathon-card";
+import BlurFade from "../components/magicui/blur-fade";
+import BlurFadeText from "../components/magicui/blur-fade-text";
+import { ProjectCard } from "../components/project-card";
+import { ResumeCard } from "../components/resume-card";
+import { Avatar } from "../components/ui/avatar";
+import { Badge } from "../components/ui/badge";
+import { DATA } from "../data/resume";
+import Link from "next/link";
+import { getDictionary } from "../get-dictionary";
+import { Locale } from "../i18n-config";
+import LocaleSwitcher from "../components/locale-switcher";
+import ShineBorder from "../components/magicui/shine-border";
+import Image from "next/image";
+import { Button } from "../components/ui/button";
+import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
 
-const BLUR_FADE_DELAY = 0.05
+const BLUR_FADE_DELAY = 0.05;
 
 export async function PageComponent({
   params: { lang },
 }: {
-  params: { lang: Locale }
+  params: { lang: Locale };
 }) {
-  const dictionary = await getDictionary(lang)
+  const dictionary = await getDictionary(lang);
 
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-16 bg-gradient-to-b from-background to-secondary/20">
@@ -48,9 +48,7 @@ export async function PageComponent({
                   <Button>
                     Contact Me <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline">
-                    View Resume
-                  </Button>
+                  <Button variant="outline">View Resume</Button>
                 </div>
               </BlurFade>
             </div>
@@ -79,10 +77,14 @@ export async function PageComponent({
       <section id="about" className="bg-secondary/30 py-16">
         <div className="container mx-auto px-4">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-3xl font-bold mb-6">{dictionary["HomePage"].title}</h2>
+            <h2 className="text-3xl font-bold mb-6">
+              {dictionary["HomePage"].title}
+            </h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <p className="text-lg text-muted-foreground">{dictionary["HomePage"].description}</p>
+            <p className="text-lg text-muted-foreground">
+              {dictionary["HomePage"].description}
+            </p>
           </BlurFade>
         </div>
       </section>
@@ -90,11 +92,16 @@ export async function PageComponent({
       <section id="work" className="py-16">
         <div className="container mx-auto px-4">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-3xl font-bold mb-8">{dictionary["HomePage"].berufserfahrungtitle}</h2>
+            <h2 className="text-3xl font-bold mb-8">
+              {dictionary["HomePage"].berufserfahrungtitle}
+            </h2>
           </BlurFade>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {DATA.work.map((work, id) => (
-              <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>
+              <BlurFade
+                key={work.company}
+                delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+              >
                 <ResumeCard
                   logoUrl={work.logoUrl}
                   altText={work.company}
@@ -114,11 +121,16 @@ export async function PageComponent({
       <section id="education" className="bg-secondary/30 py-16">
         <div className="container mx-auto px-4">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-3xl font-bold mb-8">{dictionary["HomePage"].ausbildungtitle}</h2>
+            <h2 className="text-3xl font-bold mb-8">
+              {dictionary["HomePage"].ausbildungtitle}
+            </h2>
           </BlurFade>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {DATA.education.map((education, id) => (
-              <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 8 + id * 0.05}>
+              <BlurFade
+                key={education.school}
+                delay={BLUR_FADE_DELAY * 8 + id * 0.05}
+              >
                 <ResumeCard
                   href={education.href}
                   logoUrl={education.logoUrl}
@@ -136,12 +148,16 @@ export async function PageComponent({
       <section id="skills" className="py-16">
         <div className="container mx-auto px-4">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-3xl font-bold mb-8">{dictionary["HomePage"].faehigkeiten}</h2>
+            <h2 className="text-3xl font-bold mb-8">
+              {dictionary["HomePage"].faehigkeiten}
+            </h2>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
             {DATA.skills.map((skill, id) => (
               <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge variant="secondary" className="text-lg py-2 px-4">{skill}</Badge>
+                <Badge variant="secondary" className="text-lg py-2 px-4">
+                  {skill}
+                </Badge>
               </BlurFade>
             ))}
           </div>
@@ -155,7 +171,9 @@ export async function PageComponent({
               <div className="inline-block rounded-lg bg-primary text-primary-foreground px-4 py-1.5 text-sm font-medium mb-4">
                 Meine Projekte
               </div>
-              <h2 className="text-4xl font-bold mb-4">{dictionary["HomePage"].schauean}</h2>
+              <h2 className="text-4xl font-bold mb-4">
+                {dictionary["HomePage"].schauean}
+              </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 {dictionary["HomePage"].ichhabeeinevielzahl}
               </p>
@@ -163,7 +181,10 @@ export async function PageComponent({
           </BlurFade>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {DATA.projects.map((project, id) => (
-              <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 12 + id * 0.05}>
+              <BlurFade
+                key={project.title}
+                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+              >
                 <ProjectCard
                   href={project.href}
                   title={project.title}
@@ -186,7 +207,9 @@ export async function PageComponent({
               <div className="inline-block rounded-lg bg-primary text-primary-foreground px-4 py-1.5 text-sm font-medium mb-4">
                 Hackathons
               </div>
-              <h2 className="text-4xl font-bold mb-4">{dictionary["HomePage"].ichbaue}</h2>
+              <h2 className="text-4xl font-bold mb-4">
+                {dictionary["HomePage"].ichbaue}
+              </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 {dictionary["HomePage"].ichbauegernedinge}
               </p>
@@ -195,7 +218,10 @@ export async function PageComponent({
           <BlurFade delay={BLUR_FADE_DELAY * 14}>
             <ul className="space-y-8">
               {DATA.hackathons.map((project, id) => (
-                <BlurFade key={project.title + project.dates} delay={BLUR_FADE_DELAY * 15 + id * 0.05}>
+                <BlurFade
+                  key={project.title + project.dates}
+                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
+                >
                   <HackathonCard
                     title={project.title}
                     description={project.description}
@@ -218,10 +244,15 @@ export async function PageComponent({
               <div className="inline-block rounded-lg bg-primary text-primary-foreground px-4 py-1.5 text-sm font-medium mb-4">
                 Kontakt
               </div>
-              <h2 className="text-4xl font-bold mb-4">{dictionary["HomePage"].contact}</h2>
+              <h2 className="text-4xl font-bold mb-4">
+                {dictionary["HomePage"].contact}
+              </h2>
               <p className="text-xl text-muted-foreground mb-8">
                 {dictionary["HomePage"].lustaufeinchat}{" "}
-                <Link href={DATA.contact.social.X.url} className="text-primary hover:underline">
+                <Link
+                  href={DATA.contact.social.X.url}
+                  className="text-primary hover:underline"
+                >
                   {dictionary["HomePage"].twitterdm}
                 </Link>{" "}
                 {dictionary["HomePage"].antworte}
@@ -245,5 +276,5 @@ export async function PageComponent({
         </div>
       </section>
     </main>
-  )
+  );
 }
